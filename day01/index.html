@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        Hello Day1 Page
+    </h1>
+
+    <input id= "input-name"/>
+    <button id="btn-test"> 테스트 </button>
+
+    <script>
+        console.log("hello")
+        console.log("202258026")
+        console.log("Oh jae hyun")
+
+        var btntest = document.getElementById("btn-test")
+        var inputName = document.getElementById("input-name")
+
+        btntest.addEventListener('click',()=>{
+            console.log("안녕하세요" + inputName.value + "님")
+        })
+    </script>
+    
+</body>
+</html>
