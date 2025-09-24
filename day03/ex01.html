@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="inp-num1" /> + <input id="inp-num2" /> = <input id="inp-out" />
+    </div>
+    
+    <div>
+        <button id="btn-plus">
+            submit
+        </button>    
+    </div>
+
+    <script>
+        var inpNum1 = document.getElementById("inp-num1")
+        var inpNum2 = document.getElementById("inp-num2")
+        var inpOut = document.getElementById("inp-out")
+        var btnPlus = document.getElementById("btn-plus")
+
+        btnPlus.addEventListener('click', ()=>{
+            var num1 = parseInt(inpNum1.value)
+            var num2 = parseInt(inpNum2.value)
+            
+            console.log(num1 + num2)
+             inpOut.value = num1 + num2
+        })
+    </script>
+
+    
+</body>
+</html>
