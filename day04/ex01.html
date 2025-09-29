@@ -20,24 +20,56 @@
         <input type="radio" name="group-1" value="포도"/>포도
     </div>
 
-    <button id="btn-select">
+    <button id="btn-select-1">
         확인
     </button>
 
     <p>
-        결과 : <span id="output-result"></span>
+        결과 : <span id="output-result-1"></span>
+    </p>
+
+    <div>
+    <input type="radio" name="group-2" value="에스파" checked/>에스파
+    </div>
+    
+    <div>
+        <input type="radio" name="group-2" value="아일릿"/>아일릿
+    </div>
+
+    <div>
+        <input type="radio" name="group-2" value="뉴진스"/>뉴진스
+    </div>
+
+    <div>
+        <input type="radio" name="group-2" value="아이브"/>아이브
+    </div>
+    <button id="btn-select-2">
+        확인
+    </button>
+
+    <p>
+        결과 : <span id="output-result-2"></span>
     </p>
 
     <script>
-        var btnSelect = document.getElementById("btn-select")
-        var outputResult = document.getElementById("output-result")
+        var btnSelect1 = document.getElementById("btn-select-1")
+        var btnSelect2 = document.getElementById("btn-select-2")
+        var outputResult1 = document.getElementById("output-result-1")
+        var outputResult2 = document.getElementById("output-result-2")
 
-        btnSelect.addEventListener = ('click',()=>{
+        btnSelect1.addEventListener('click',()=>{
             
-            var selectItem = document.querySelector("intput[name=group-1]:checked")
-            console.log = (selectItem)
+            var selectItem = document.querySelector("input[name=group-1]:checked")
+            console.log(selectItem)
             
-            outputResult.innerText = 'select ok' + value.selectItem
+            outputResult1.innerText = 'select' + selectItem.value
+        })
+        btnSelect2.addEventListener('click',()=>{
+            
+            var selectItem2 = document.querySelector("input[name=group-2]:checked")
+            console.log(selectItem2)
+
+            outputResult2.innerText = 'select' + selectItem2.value
         })
     </script>
 
