@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider example.</title>
+</head>
+<body>
+    <h1> 볼륨을 높여요 </h1>
+    <div>
+        <input type="range" min="0" max="100" value="50" id="range-vol">
+        : <span id="current-vol"> 50 </span>
+    </div>
+    <button id="btn-submit"> 제출 </button>
+    <p id="txt-result"></p>
+
+    <script>
+        var rangeVol = document.getElementById("range-vol")
+        var btnSubmit = document.getElementById("btn-submit")
+        var txtResult = document.getElementById("txt-result")
+        var currentVol = document.getElementById("current-vol")
+
+        btnSubmit.addEventListener('click',()=>{
+            txtResult.innerText = "volume :" + rangeVol.value
+        })
+        rangeVol.addEventListener("change",()=>{
+            console.log(rangVol.value)
+            currentVol.innerText = rangeVol.value
+        })
+        rangeVol.addEventListener('input',()=>{
+            currentVol.innerText = rangeVol.value
+        })
+    </script>
+    
+    
+</body>
+</html>
