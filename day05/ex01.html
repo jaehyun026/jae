@@ -10,13 +10,21 @@
     <p> 약관에 동의 하십니까? </p>
     <input type="checkbox" id="chk-agree"/>
     <button id="btn-submit"> 제출 </button>
-    <p id="txt-result">
-
-    </p>
+    <p id="txt-result"></p>
     <script>
         var chkAgree = document.getElementById("chk-agree")
-        var btnSubmit = document.getelementbyid("btn-submit")
-        
+        var btnSubmit = document.getElementById("btn-submit")
+        var txtResult = document.getElementById("txt-result")
+        btnSubmit.addEventListener('click',()=>{
+            console.log(chkAgree.checked)
+            if(chkAgree.checked == true){
+                txtResult.innerText = "동의함"
+            }
+            else{
+                txtResult.innerText = "동의 안함"
+            }
+            
+        })
     </script>
 </body>
 </html>
