@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>train</title>
+</head>
+<body>
+    <h1> 열차표 </h1>
+    
+    <div>
+        <select id="sel-city">
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+            <option value="대구">대구</option>
+            <option value="대전">대전</option>
+            <option value="전주" selected>전주</option>
+            <option value="인천">인천</option>
+            <option value="파주">파주</option>
+        </select>
+    </div>
+    <p id="text-result"></p>
+    <button id="btn"> 선택 </button>
+
+        
+    <script>
+        var Selcity = document.getElementById("sel-city")
+        var Textresult = document.getElementById("text-result")
+        var Btn = document.getElementById("btn")
+
+        Btn.addEventListener('click',()=>{
+           console.log(Selcity.value)
+            Textresult.innerText = "출발지는 :" + Selcity.value 
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+</head>
+<body>
+    <h1 id="counter-output"> counter = 0</h1>
+
+    <div>
+        <button id="btn-inc"> 증가 </button>
+        <button id="btn-dec"> 감소 </button>
+    </div>
+
+    <script>
+        var Btninc = document.getElementById("btn-inc")
+        var Btndec = document.getElementById("btn-dec")
+        var CounterOutput = document.getElementById("counter-output")
+        var counter = 0
+
+        Btninc.addEventListener('click',()=>{
+            counter = counter +1
+            CounterOutput.innerText = "counter : " + counter
+        })
+        Btndec.addEventListener('click',()=>{
+            counter = counter -1
+            CounterOutput.innerText = "counter : " + counter
+        })
+    </script>
+    
+</body>
+</html>
