@@ -11,21 +11,30 @@
     <div>
         <button id="btn-inc"> 증가 </button>
         <button id="btn-dec"> 감소 </button>
+        <button id="btn-res"> 리셋 </button>
     </div>
 
     <script>
         var Btninc = document.getElementById("btn-inc")
         var Btndec = document.getElementById("btn-dec")
+        var Btnres = document.getElementById("btn-res")
         var CounterOutput = document.getElementById("counter-output")
         var counter = 0
 
         Btninc.addEventListener('click',()=>{
             counter = counter +1
             CounterOutput.innerText = "counter : " + counter
+            console.log("counter" + counter)
         })
         Btndec.addEventListener('click',()=>{
             counter = counter -1
             CounterOutput.innerText = "counter : " + counter
+            console.log("counter" + counter)
+        })
+        Btnres.addEventListener('click',()=>{
+            counter = 0
+            CounterOutput.innerText = "counter : " + counter
+            console.log("counter" + counter)
         })
     </script>
     
