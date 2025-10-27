@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+        .box{
+            position: relative;
+            width: 64px;
+            height: 64px;
+            background-color: rgb(255, 175, 3);
+            color: white;
+            /*font-size: 8px;*/
+            border: 1px solid black;
+            margin-bottom: 8px;
+        }
+        .anim-type-1 {
+            animation-name: move;
+            animation-duration: 3s;
+            animation-iteration-count: 2;
+            animation-direction: alternate;
+            /*animation-direction: normal;*/
+            /*animation-direction: alternate-reverse;*/
+            animation-fill-mode: forwards;
+        }
+        .anim-type-2 {
+            animation-timing-function: linear;
+        }
+        .anim-type-3 {
+            animation-timing-function: cubic-bezier(cubic-bezier(.0,.1,.24,.63));
+        }
+        @keyframes move{
+            from {left : 0px;}
+            to {left: 300px;}
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box anim-type-1"> </div>
+    <div class="box anim-type-1 anim-type-2"> </div>
+    <div class="box anim-type-1 anim-type-2 anim-type-3"> </div>
+    
+</body>
+</html>

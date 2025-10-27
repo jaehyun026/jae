@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+        .box{
+            width: 256px;
+            height: 128px;
+            background-color: blue;
+            color: white;
+            /*font-size: 8px;*/
+            border: 1px solid black;
+            margin-bottom: 8px;
+        }
+        .hor-center{
+            display: flex;
+            justify-content: center;   /*가로위치*/
+            align-items: flex-start;   /*세로위치*/
+        }
+        .hor-right{
+            display: flex;
+            justify-content: right;   /*가로위치*/
+            align-items: flex-start;  /*세로위치*/
+        }
+        .vert-top{
+            display: flex;
+            justify-content: left;
+            align-items: flex-start;
+        }
+        .vert-center{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+        .vert-bottom{
+            display: flex;
+            justify-content: left;
+            align-items: flex-end;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="box">Top Left Align</div>
+    <div class="box hor-center">Top Center Align</div>
+    <div class="box hor-right">Top Right Align</div>
+    <div class="box vert-top">Top Left Align</div>
+    <div class="box vert-center">Center Left Align</div>
+    <div class="box vert-bottom">Bottom Left Align</div>
+    
+</body>
+</html>
