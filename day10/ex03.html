@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+            background-color: black;
+        }
+        .frame {
+            display: flex;
+            border: 1px solid white;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            text-align: center;
+            flex-wrap: nowrap;
+        }
+        .type-1 {
+            flex-wrap: nowrap;
+        }
+        .type-2{
+            flex-wrap: wrap;
+        }
+        .box {
+            width: 64px;
+            height: 32px;
+            background-color: blue;
+            color: white;
+
+            margin: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame type-1">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+    </div>
+
+    <div class="frame type-2">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+    </div>
+</body>
+</html>

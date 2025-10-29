@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+            background-color: black;
+        }
+        .box {
+            width : 250px;
+            height: 32px;
+            background-color: blue;
+            color: white;
+
+            margin: 8px;
+        }
+
+        .type-1 {
+            overflow-wrap: normal; /*기본 단어중간에 절대 줄바꿈 안 함(공백에서만 함)*/
+            word-break: break-all; /*단어 중간이여도 강제로 줄바꿈*/
+        }
+
+         .type-2 {
+            overflow-wrap: break-word; /*단어가 길어서 박스를 넘을때만 줄바꿈(공백 > 단어 우선순위)*/
+            word-break: normal; /*언어 규칙에 맞게 알아서 줄바꿈*/
+        }
+
+         .type-3 {
+            overflow-wrap: anywhere; /*어디서든지 줄바꿈 가능(공백없어도 함)*/
+        }
+
+        .type-4 {
+            overflow-wrap: normal; /*두개가 합쳐지면 줄바꿈을 안 함*/
+            word-break: normal; 
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="box type-1">
+        Loremipsumdolorsitamet,consecteturadipiscingelit.
+    </div>
+    
+    <div class="box type-2">
+        Loremipsumdolorsitamet,consecteturadipiscingelit.
+    </div>
+
+    <div class="box type-3">
+        Loremipsumdolorsitamet,consecteturadipiscingelit.
+    </div>
+
+    <div class="box type-4">
+        Loremipsumdolorsitamet,consecteturadipiscingelit.
+    </div>
+</body>
+</html>
