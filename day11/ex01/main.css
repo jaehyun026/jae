@@ -1,0 +1,39 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: blue;
+    color: white;
+}
+
+.box-1 {
+    display: flex;
+    width: 128px;
+    height: 64px;
+    background-color: black;
+    color: green;
+    justify-content: left;
+    align-items: flex-start;
+    border: 1px solid white;
+}
+
+.box-2 {
+    display: flex;
+    width: 128px;
+    height: 64px;
+    background-color: black;
+    color: green;
+    justify-content: left;
+    align-items: center;
+    border: 1px solid white;
+}
+
+.box-3 {
+    display: flex;
+    width: 128px;
+    height: 64px;
+    background-color: black;
+    color: green;
+    justify-content: left;
+    align-items: flex-end;
+    border: 1px solid white;
+}
