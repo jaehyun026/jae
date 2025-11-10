@@ -3,7 +3,7 @@
 body {
     display: flex;
     background-color: blue;
-    background-image: url("https://i.namu.wiki/i/0XmCa41Jd0jnDExr6ISNFhMbxswzEWlVrgyKykVDtDajjr2HPx7aDA4y-2mm4f92yIZn2pZMI91BsssUEHLbAg.webp?v=2");
+    background-image: url("./image/dragon.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -30,7 +30,7 @@ body {
 }
 
 .sm-text {
-    font-size: 16px;
+    font-size: 10px;
     margin: 10px;
 }
 
