@@ -19,9 +19,9 @@
         <div class="big-text">
             던전앤 드래곤즈
         </div>
-        <div class="mid-text">
+        <button class="mid-text" id="btn">
             게임 시작
-        </div>
+        </button>
         <div class="mid-text">
             게임 로드
         </div>
@@ -35,6 +35,13 @@
             copyright 10454,gbox3d
         </div>
     </div>
+
+    <script class="body">
+        var Btn = document.getElementById("btn");
+        Btn.addEventListener('click', () => {
+            console.log("게임을 시작합니다!")
+        })
+    </script>
 
 
     <script type="module">

@@ -55,3 +55,18 @@ body {
     justify-content: flex-start;
     padding: 0px;
 }
+
+button {
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Galmuri9';
+    font-size: 32px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    color: blue;
+    transform: scale(1.05);
+}
