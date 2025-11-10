@@ -3,6 +3,10 @@
 body {
     display: flex;
     background-color: blue;
+    background-image: url("https://i.namu.wiki/i/0XmCa41Jd0jnDExr6ISNFhMbxswzEWlVrgyKykVDtDajjr2HPx7aDA4y-2mm4f92yIZn2pZMI91BsssUEHLbAg.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     margin: 0px;
     padding: 0px;
     color: white;
