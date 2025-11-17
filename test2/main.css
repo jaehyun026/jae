@@ -10,8 +10,9 @@ body {
 }
 
 .chessboard-container {
-    width: 90vmin;
-    height: 90vmin;
+    /* 휴대폰으로도 알맞게 사이즈 조정 */
+    width: min(90vw, 90vh, 600px);
+    aspect-ratio: 1 / 1;
     box-shadow: 0 8px 30px rgba(0,0,0,0.6);
     border-radius: 10px;
     overflow: hidden;
@@ -63,7 +64,8 @@ body {
 
 /* 말 스타일 (큰 폰트, 텍스트 외곽선 흉내) */
 .piece {
-    font-size: 8vmin; /* 필요하면 조절 */
+    /* Stabilize piece size on small viewports to reduce resizing jitter */
+    font-size: clamp(24px, 8vmin, 64px);
     line-height: 1;
     pointer-events: none; /* 클릭은 square로 받음 (간단히 처리하기 위함) */
     user-select: none;
@@ -104,7 +106,7 @@ body {
 }
 
 .square.move-spot::after {
-    content: "✕";
+    content: "O";
     position: absolute;
     font-size: 6vmin;
     color: rgba(255,0,0,0.9);
