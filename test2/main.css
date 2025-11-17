@@ -1,0 +1,124 @@
+/* 기본 레이아웃 */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #222;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Helvetica Neue", Arial;
+}
+
+.chessboard-container {
+    width: 90vmin;
+    height: 90vmin;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* checkmate상태화면 */
+.chess-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.status-message {
+    font-size: 40px;
+    font-weight: bold;
+    color: yellow;
+    text-shadow: 2px 2px 8px black;
+    margin-bottom: 20px; /* 체스판과 간격 */
+}
+
+/* 8x8 그리드 */
+.chessboard {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+}
+
+/* 칸 스타일 */
+.square {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.light {
+    background: rgb(245, 245, 220); /* 베이지 */
+}
+
+.dark {
+    background: rgb(101, 67, 33); /* 우드 느낌 다크 */
+}
+
+/* 말 스타일 (큰 폰트, 텍스트 외곽선 흉내) */
+.piece {
+    font-size: 8vmin; /* 필요하면 조절 */
+    line-height: 1;
+    pointer-events: none; /* 클릭은 square로 받음 (간단히 처리하기 위함) */
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 흰 말 : 흰색 + 검정 외곽 */
+.piece.white {
+    color: white;
+    text-shadow:
+        -2px -2px 0 black,
+         2px -2px 0 black,
+        -2px  2px 0 black,
+         2px  2px 0 black;
+}
+
+/* 검정 말 : 검정 + 흰 외곽 */
+.piece.black {
+    color: black;
+    text-shadow:
+        -2px -2px 0 white,
+         2px -2px 0 white,
+        -2px  2px 0 white,
+         2px  2px 0 white;
+}
+
+/* 선택된 말 테두리 */
+.square.selected {
+    outline: 4px solid rgba(255, 215, 0, 0.85);
+    z-index: 2;
+}
+
+/* 이동 가능 표시 (X 문자) */
+.square.move-spot {
+    background: linear-gradient(90deg, rgba(255,0,0,0.08), rgba(255,0,0,0.03));
+}
+
+.square.move-spot::after {
+    content: "✕";
+    position: absolute;
+    font-size: 6vmin;
+    color: rgba(255,0,0,0.9);
+    pointer-events: none;
+    transform: translateY(-4%);
+}
+
+/* 체크 표시 (킹이 체크일 때 빨간 테두리) */
+.square.check-king {
+    box-shadow: inset 0 0 0 6px rgba(255,0,0,0.25);
+}
+
+/* 간단한 반응형 */
+@media (max-width: 600px) {
+    .piece { font-size: 12vmin; }
+    .square.move-spot::after { font-size: 8vmin; }
+}
