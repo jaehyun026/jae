@@ -1,10 +1,10 @@
 // 말 유니코드 맵과 초기 보드 상태, 보드 복사 도우미
 export const pieces = {
     white: {
-        rook: "♖", knight: "♘", bishop: "♗", queen: "♕", king: "♔", pawn: "♙"
+        rook: "♖", knight: "♘", bishop: "♗", queen: "♔", king: "♕", pawn: "♙"
     },
     black: {
-        rook: "♜", knight: "♞", bishop: "♝", queen: "♛", king: "♚", pawn: "♟"
+        rook: "♜", knight: "♞", bishop: "♝", queen: "♚", king: "♛", pawn: "♟"
     }
 };
 
