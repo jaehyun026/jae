@@ -27,9 +27,9 @@ export default function main() {
             // compute moves: 항상 체크를 해소하는 수만 허용 (체크 상태여도 동일)
             const pseudo = getValidMoves(board, r, c, turn);
             const legal = [];
-            for (const [mr,mc] of pseudo) {
+            for (const [mr, mc] of pseudo) {
                 const nb = simulateMove(board, r, c, mr, mc);
-                if (!isCheck(nb, turn)) legal.push([mr,mc]);
+                if (!isCheck(nb, turn)) legal.push([mr, mc]);
             }
             if (legal.length === 0) return; // 움직일 곳 없음
 
@@ -54,9 +54,9 @@ export default function main() {
             if ((cell[0] === 'w' ? 'white' : 'black') === turn) {
                 const pseudo = getValidMoves(board, r, c, turn);
                 const legal = [];
-                for (const [mr,mc] of pseudo) {
+                for (const [mr, mc] of pseudo) {
                     const nb = simulateMove(board, r, c, mr, mc);
-                    if (!isCheck(nb, turn)) legal.push([mr,mc]);
+                    if (!isCheck(nb, turn)) legal.push([mr, mc]);
                 }
                 if (legal.length === 0) return;
                 selected = { r, c };
@@ -68,7 +68,7 @@ export default function main() {
         }
 
         // check if clicked square is one of legalMoves
-        const match = legalMoves.some(([mr,mc]) => mr===r && mc===c);
+        const match = legalMoves.some(([mr, mc]) => mr === r && mc === c);
         if (!match) {
             // 클릭한 영역이 합법적 이동이 아닌 경우 선택 해제
             clearHighlights();
@@ -106,8 +106,8 @@ export default function main() {
     // 렌더 함수
     function renderBoard() {
         boardEl.innerHTML = "";
-        for (let r=0;r<8;r++){
-            for (let c=0;c<8;c++){
+        for (let r = 0; r < 8; r++) {
+            for (let c = 0; c < 8; c++) {
                 const sq = document.createElement("div");
                 sq.classList.add("square");
                 if ((r + c) % 2 === 0) sq.classList.add("light");
@@ -137,13 +137,13 @@ export default function main() {
         if (isCheck(board, opponent)) {
             const kp = findKing(board, opponent);
             if (kp) {
-                const [kr,kc] = kp;
+                const [kr, kc] = kp;
                 const kingSquare = document.querySelector(`.square[data-row="${kr}"][data-col="${kc}"]`);
                 if (kingSquare) kingSquare.classList.add("check-king");
             }
         }
         // 상태 메시지 갱신
-        try { updateStatus(board, turn); } catch (e) {}
+        try { updateStatus(board, turn); } catch (e) { }
     }
 
     // 유틸: selected highlight
@@ -154,7 +154,7 @@ export default function main() {
     }
 
     function highlightMoves() {
-        for (const [r,c] of legalMoves) {
+        for (const [r, c] of legalMoves) {
             const sq = document.querySelector(`.square[data-row="${r}"][data-col="${c}"]`);
             if (sq) sq.classList.add("move-spot");
         }
@@ -169,7 +169,30 @@ export default function main() {
     // 킹 위치 찾는 헬퍼 (렌더 및 체크 표시용)
     function findKing(boardState, color) {
         const prefix = color === 'white' ? 'w' : 'b';
-        for (let r=0;r<8;r++) for (let c=0;c<8;c++) if (boardState[r][c] === (prefix + "king")) return [r,c];
+        for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) if (boardState[r][c] === (prefix + "king")) return [r, c];
         return null;
     }
+
+    // iOS Safari 대응: 화면 크기 변화 시 정확한 정사각형 유지
+    function resizeBoard() {
+        const container = document.querySelector(".chessboard-container");
+        const board = document.getElementById("chessboard");
+
+        // 컨테이너 너비 기준 정사각형 유지
+        const size = container.clientWidth;
+        container.style.height = size + "px";
+        board.style.height = size + "px";
+
+        // 각 칸의 크기 강제로 재계산
+        document.querySelectorAll(".square").forEach(sq => {
+            sq.style.height = (size / 8) + "px";
+            sq.style.width = (size / 8) + "px";
+        });
+    }
+
+    // 초기 실행 + 리사이즈 감지
+    window.addEventListener("resize", resizeBoard);
+    window.addEventListener("orientationchange", resizeBoard);
+    setTimeout(resizeBoard, 50);  // Safari 초기 로드 안정화용
+
 }
