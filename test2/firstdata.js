@@ -25,7 +25,7 @@ export const initialBoard = [
     ["wrook", "wknight", "wbishop", "wqueen", "wking", "wbishop", "wknight", "wrook"]
 ];
 
-// deep clone helper
+/* 체스보드 만드는 복사배열 */
 export function cloneBoard(board) {
     return board.map(row => row.map(cell => cell));
 }
