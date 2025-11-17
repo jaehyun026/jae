@@ -9,6 +9,31 @@ export default function main() {
     let selected = null; // {r,c}
     let legalMoves = []; // [[r,c],...]
 
+    // 보드 컨테이너를 픽셀 단위로 고정하여 모바일(Safari)에서 깜박임/잘림 방지
+    function setBoardPixelSize() {
+        const cont = document.querySelector('.chessboard-container');
+        if (!cont) return;
+        const vw = window.innerWidth || document.documentElement.clientWidth;
+        const vh = (window.visualViewport && window.visualViewport.height) ? window.visualViewport.height : (window.innerHeight || document.documentElement.clientHeight);
+        const maxPx = 600; // 최대 크기(원하면 조정)
+        // 안전 영역(safe-area-inset)을 CSS로 처리하므로 JS에서는 단순히 뷰포트 기반 픽셀 크기 사용
+        const size = Math.floor(Math.min(vw, vh, maxPx));
+        cont.style.width = size + 'px';
+        cont.style.height = size + 'px';
+    }
+
+    // 리사이즈/회전 시 재계산 (RAF로 디바운스)
+    let _resizeRaf = null;
+    function scheduleResize() {
+        if (_resizeRaf) cancelAnimationFrame(_resizeRaf);
+        _resizeRaf = requestAnimationFrame(() => { setBoardPixelSize(); _resizeRaf = null; });
+    }
+    window.addEventListener('resize', scheduleResize);
+    window.addEventListener('orientationchange', scheduleResize);
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', scheduleResize);
+
+    // 초기 크기 계산 후 렌더
+    setBoardPixelSize();
     // 초기 렌더
     renderBoard();
 
