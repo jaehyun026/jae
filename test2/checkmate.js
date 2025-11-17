@@ -1,6 +1,5 @@
 // 체크/체크메이트 검사: getValidMoves, simulateMove 필요
 import { getValidMoves, simulateMove } from './chessrule.js';
-import { cloneBoard } from './firstdata.js';
 
 function findKing(board, turn) {
     const target = turn === 'white' ? 'wking' : 'bking';
