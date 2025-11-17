@@ -24,17 +24,12 @@ export default function main() {
             if (!cell) return; // 빈 칸 클릭 무시
             if ((cell[0] === 'w' ? 'white' : 'black') !== turn) return; // 상대 말 클릭 무시
 
-            // compute moves
+            // compute moves: 항상 체크를 해소하는 수만 허용 (체크 상태여도 동일)
             const pseudo = getValidMoves(board, r, c, turn);
-            let legal = [];
-            // 변경: 현재 턴이 체크 상태이면 체크 해소 여부로 필터하지 않고 모든 pseudo-move를 허용
-            if (isCheck(board, turn)) {
-                legal = pseudo.slice();
-            } else {
-                for (const [mr,mc] of pseudo) {
-                    const nb = simulateMove(board, r, c, mr, mc);
-                    if (!isCheck(nb, turn)) legal.push([mr,mc]);
-                }
+            const legal = [];
+            for (const [mr,mc] of pseudo) {
+                const nb = simulateMove(board, r, c, mr, mc);
+                if (!isCheck(nb, turn)) legal.push([mr,mc]);
             }
             if (legal.length === 0) return; // 움직일 곳 없음
 
@@ -58,14 +53,10 @@ export default function main() {
             // 재선택 시 위와 동일 로직
             if ((cell[0] === 'w' ? 'white' : 'black') === turn) {
                 const pseudo = getValidMoves(board, r, c, turn);
-                let legal = [];
-                if (isCheck(board, turn)) {
-                    legal = pseudo.slice();
-                } else {
-                    for (const [mr,mc] of pseudo) {
-                        const nb = simulateMove(board, r, c, mr, mc);
-                        if (!isCheck(nb, turn)) legal.push([mr,mc]);
-                    }
+                const legal = [];
+                for (const [mr,mc] of pseudo) {
+                    const nb = simulateMove(board, r, c, mr, mc);
+                    if (!isCheck(nb, turn)) legal.push([mr,mc]);
                 }
                 if (legal.length === 0) return;
                 selected = { r, c };
@@ -96,8 +87,8 @@ export default function main() {
         // 턴 변경 및 체크/체크메이트 검사
         const opponent = turn === "white" ? "black" : "white";
         if (isCheckmate(board, opponent)) {
+            turn = opponent;  // 턴을 미리 바꿈 (상대 턴이 체크메이트 상태임을 renderBoard에서 표시)
             renderBoard();
-            try { updateStatus(board, opponent); } catch (e) {}
             setTimeout(() => alert(`${turn.toUpperCase()} 승리! 체크메이트입니다.`), 10);
             return;
         }
