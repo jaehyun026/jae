@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Simple';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Danjo-bold-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+body {
+    display: flex;
+    background: #222;
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    font-family: 'Simple';
+    flex-direction: column;
+    height: 100vh;
+    background-image: url("./dragon.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 32px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: none;
+    color: white;
+    font-family: 'Simple';
+    transition: 0.3s;
+}
+
+button:hover {
+    color: blue;
+    transform: scale(1.05);
+}
+
+header {
+    display: flex;
+    padding: 16px;
+    justify-content: flex-end;
+}
+
+footer {
+    display: flex;
+    padding: 16px;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 64px;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-item {
+    font-size: 32px;
+}
+
+.select {
+    background-color: black;
+    color: white;
+}
