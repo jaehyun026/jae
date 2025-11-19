@@ -2,6 +2,19 @@ import { initialBoard, cloneBoard, pieces } from './firstdata.js';
 import { getValidMoves, simulateMove } from './chessrule.js';
 import { isCheck, isCheckmate, updateStatus } from './checkmate.js';
 
+/*debounce 헬퍼 추가*/
+function debounce(fn, wait = 80) {
+    let t;
+    return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn(...args), wait);
+    };
+}
+// 초기 안정화 호출 (setTimeout 유지해도 되고 requestAnimationFrame + setTimeout 혼용)
+setTimeout(() => {
+    resizeBoard();
+}, 120);
+
 export default function main() {
     const boardEl = document.getElementById("chessboard");
     let board = cloneBoard(initialBoard);
@@ -130,6 +143,10 @@ export default function main() {
                 // (kingPos는 해당 턴의 킹; isCheck 이미 알려줌) — 대신 isCheck 전체에서 사용
                 boardEl.appendChild(sq);
             }
+            // renderBoard() 맨 마지막 (updateStatus 호출 직후)에 추가
+            try { updateStatus(board, turn); } catch (e) { }
+            resizeBoard(); // render 후 항상 크기 보정
+
         }
 
         // 표시: 만약 현재 턴 상대가 체크 상태라면 체크당한 킹 위치에 클래스 추가
@@ -177,6 +194,7 @@ export default function main() {
     function resizeBoard() {
         const container = document.querySelector(".chessboard-container");
         const board = document.getElementById("chessboard");
+        if (!container || !board) return;
 
         // 컨테이너 너비 기준 정사각형 유지
         const size = container.clientWidth;
@@ -191,8 +209,8 @@ export default function main() {
     }
 
     // 초기 실행 + 리사이즈 감지
-    window.addEventListener("resize", resizeBoard);
-    window.addEventListener("orientationchange", resizeBoard);
-    setTimeout(resizeBoard, 50);  // Safari 초기 로드 안정화용
+    const debouncedResize = debounce(resizeBoard, 80);
+    window.addEventListener("resize", debouncedResize);
+    window.addEventListener("orientationchange", debouncedResize);
 
 }
