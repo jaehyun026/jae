@@ -10,10 +10,6 @@ function debounce(fn, wait = 80) {
         t = setTimeout(() => fn(...args), wait);
     };
 }
-// 초기 안정화 호출 (setTimeout 유지해도 되고 requestAnimationFrame + setTimeout 혼용)
-setTimeout(() => {
-    resizeBoard();
-}, 120);
 
 export default function main() {
     const boardEl = document.getElementById("chessboard");
