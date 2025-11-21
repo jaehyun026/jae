@@ -1,3 +1,54 @@
+const pieceScore = {
+    pawn: 1,
+    knight: 3,
+    bishop: 3,
+    rook: 5,
+    queen: 9,
+    king: 100
+};
+function evaluateBoard(board) {
+    // board cell format: null or string like 'wpawn', 'bking'
+    let score = 0;
+    for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+            const cell = board[r][c];
+            if (!cell) continue;
+            const color = cell[0]; // 'w' or 'b'
+            const kind = cell.slice(1);
+            const value = pieceScore[kind] || 0;
+            if (color === 'b') score += value;
+            else score -= value;
+        }
+    }
+    return score;
+}
+
+function aiMove(board) {
+    let bestScore = -Infinity;
+    let bestMove = null;
+
+    // Find all black pieces and evaluate legal moves
+    for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+            const cell = board[r][c];
+            if (!cell || cell[0] !== 'b') continue;
+
+            const moves = getValidMoves(board, r, c, 'black');
+            for (const [mr, mc] of moves) {
+                const nb = simulateMove(cloneBoard(board), r, c, mr, mc);
+                const score = evaluateBoard(nb);
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = { from: { r, c }, to: { r: mr, c: mc } };
+                }
+            }
+        }
+    }
+
+    if (!bestMove) return board; // no move
+    return simulateMove(board, bestMove.from.r, bestMove.from.c, bestMove.to.r, bestMove.to.c);
+}
+
 import { initialBoard, cloneBoard, pieces } from './firstdata.js';
 import { getValidMoves, simulateMove } from './chessrule.js';
 import { isCheck, isCheckmate, updateStatus } from './checkmate.js';
@@ -12,12 +63,19 @@ function debounce(fn, wait = 80) {
 }
 
 export default function main() {
+    const gameMode = localStorage.getItem("gameMode");
+
     const boardEl = document.getElementById("chessboard");
     let board = cloneBoard(initialBoard);
     let turn = "white"; // white 먼저
     let selected = null; // {r,c}
     let legalMoves = []; // [[r,c],...]
 
+    // AI가 흑부터 두는 모드라면 초기 보드에서 AI 한 수 두기
+   /* if (gameMode === "pve" && turn === "black") {
+        board = aiMove(board);
+        turn = "white";
+    }*/
     // 초기 렌더
     renderBoard();
 
@@ -110,6 +168,26 @@ export default function main() {
 
         turn = opponent;
         renderBoard();
+
+        // PVE 모드: AI(black)가 다음이라면 자동으로 한 수 두도록 처리
+        if (gameMode === 'pve' && turn === 'black') {
+            // UI 반영을 위해 약간 지연 후 실행
+            setTimeout(() => {
+                board = aiMove(board);
+
+                // AI가 둔 후 체크메이트 검사 (플레이어인 white가 체크메이트 당했는지)
+                if (isCheckmate(board, 'white')) {
+                    turn = 'white';
+                    renderBoard();
+                    setTimeout(() => alert(`BLACK 승리! 체크메이트입니다.`), 10);
+                    return;
+                }
+
+                // AI 두고 나면 백(플레이어) 차례로 전환
+                turn = 'white';
+                renderBoard();
+            }, 300);
+        }
     });
 
     // 렌더 함수

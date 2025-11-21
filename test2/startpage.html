@@ -12,15 +12,30 @@
 
 <body>
     <header>
-         <div>♕CHESS GAME♕</div>
+        <div>♕CHESS GAME♕</div>
     </header>
     <main>
-        <button onclick="location.href='chess.html'">Start</button>
-        <div class="menu-item" data-action="option">Option</div>
+        <button id="startBtn">Start</button>
+        <button id="optionBtn">Option</div>
     </main>
     <footer>
         <div>creater by KINGVIDIA</div>
     </footer>
+
+    <div id="optionPopup" class="popup">
+        <div class="popup-content">
+            <div style="margin-bottom: 10px; font-size: 24px;">게임 모드 선택</div>
+            <select id="modeSelect">
+                <option value="pvp">Player vs Player</option>
+                <option value="pve">Player vs AI</option>
+            </select>
+        </div>
+    </div>
+
+    <script type="module">
+        import main from './startpage.js';
+        main();
+    </script>
 
 
 </body>
