@@ -54,6 +54,7 @@ import { initialBoard, cloneBoard, pieces } from './firstdata.js';
 import { getValidMoves, simulateMove } from './chessrule.js';
 import { isCheck, isCheckmate, updateStatus } from './checkmate.js';
 import { popup, playSFX } from './popup.js';
+import { logoeffect } from './logoeffect.js';
 
 /*debounce 헬퍼 추가*/
 function debounce(fn, wait = 80) {
@@ -66,6 +67,7 @@ function debounce(fn, wait = 80) {
 
 export default function main() {
         popup();
+        logoeffect();
     const gameMode = localStorage.getItem("gameMode");
 
     const boardEl = document.getElementById("chessboard");

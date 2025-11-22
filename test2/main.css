@@ -285,3 +285,33 @@ header button:hover {
 #close-popup:hover {
     background: #666;
 }
+
+/* ===== 스플래시 화면 ===== */
+#splash {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+/* 스플래시 로고 */
+#splashLogo {
+    width: 420px;
+    opacity: 0;
+    animation: splashFade 1.2s ease forwards;
+}
+
+@keyframes splashFade {
+    0% { opacity: 0; transform: scale(0.92); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* startpage 요소 비활성화 시작 */
+.fade-target {
+    opacity: 0;
+}
