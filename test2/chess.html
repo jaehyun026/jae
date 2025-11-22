@@ -8,21 +8,53 @@
     <style>
         @import url('./main.css');
     </style>
-    <!-- <link rel="stylesheet" href="./main.css"> style보다 빠른거 --> 
+    <!-- <link rel="stylesheet" href="./main.css"> style보다 빠른거 -->
 </head>
 
 <body>
-    <div class="chess-wrapper">
-        <div id="status-message" class="status-message"></div>
-
-        <div class="chessboard-container">
-            <div id="chessboard" class="chessboard"></div>
+    <header>
+        <div>
+            <button id="setting-btn">⚙ Settings</button>
         </div>
-    </div>    
-        <script type="module">
-            import main from './chess.js';
-            main();
-        </script>
+    </header>
+    <main>
+        <div class="chess-wrapper">
+            <div id="status-message" class="status-message"></div>
+
+            <div class="chessboard-container">
+                <div id="chessboard" class="chessboard"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <button id="back-btn">← Back</button>
+        </div>
+    </footer>
+
+    <div id="setting-popup" class="popup hidden">
+        <div class="popup-content">
+            <h3>환경 설정</h3>
+
+            <div class="option">
+                <button id="sound-btn" class="sound-btn">사운드: ON</button>
+                <div class="option-item">
+                    <label for="volume-slider">효과음 볼륨</label>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.01">
+                </div>
+            </div>
+
+
+            <button id="close-popup">닫기</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import main from './chess.js';
+        main();
+
+    </script>
 </body>
 
 </html>

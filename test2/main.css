@@ -4,8 +4,7 @@ body {
     height: auto;
     min-height: 100dvh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     background: #222;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Helvetica Neue", Arial;
 }
@@ -138,4 +137,151 @@ body {
     .square.move-spot::after {
         font-size: 8vmin;
     }
+}
+
+/* ===== 상단 바 ===== */
+header {
+    display: flex;
+    padding: 12px 20px;
+    background: #222;
+    justify-content: flex-end
+}
+
+footer {
+    display: flex;
+    padding: 12px 20px;
+    background: #222;
+    justify-content: flex-start;
+}
+
+footer button {
+    padding: 10px 16px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+footer button:hover {
+    background: #444;
+}
+
+header button {
+    padding: 10px 16px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+header button:hover {
+    background: #444;
+}
+
+/* ===== 팝업창 전체 배경 ===== */
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ===== 팝업 본체 ===== */
+.popup-content {
+    width: 280px;
+    padding: 20px;
+    background: #333;
+    border-radius: 12px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content h3 {
+    text-align: center;
+    margin: 0;
+}
+
+/* ===== 사운드 버튼 ===== */
+.sound-btn {
+    width: 100%;
+    padding: 10px 12px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sound-btn:hover {
+    background: #555;
+}
+
+/* ===== 볼륨 슬라이더===== */
+.option-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.option-item label {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+#volume-slider {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    background: #666;
+    border-radius: 5px;
+    appearance: none;
+    outline: none;
+}
+
+#volume-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    background: #888;
+    border-radius: 5px;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    margin-top: -6px;
+}
+
+/* ===== 닫기 버튼 ===== */
+#close-popup {
+    padding: 10px;
+    background: #555;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#close-popup:hover {
+    background: #666;
 }
