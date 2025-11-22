@@ -2,9 +2,9 @@
 //   효과음 로드 (원하는 MP3 넣으면 됨)
 // ==============================
 export const sfx = {
-    move: new Audio("./sound/move.mp3"),
-    capture: new Audio("./sound/capture.mp3"),
-    check: new Audio("./sound/check.mp3")
+    move: new Audio("./move.mp4"),
+    capture: new Audio("./capture.mp4"),
+    check: new Audio("./checkmate.mp4")
 };
 
 // ==============================

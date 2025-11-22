@@ -53,7 +53,7 @@ function aiMove(board) {
 import { initialBoard, cloneBoard, pieces } from './firstdata.js';
 import { getValidMoves, simulateMove } from './chessrule.js';
 import { isCheck, isCheckmate, updateStatus } from './checkmate.js';
-import {popup} from './popup.js';
+import { popup, playSFX } from './popup.js';
 
 /*debounce 헬퍼 추가*/
 function debounce(fn, wait = 80) {
@@ -148,7 +148,12 @@ export default function main() {
         }
 
         // 실제 이동 수행
+        const targetCell = board[r][c];
         board = simulateMove(board, selected.r, selected.c, r, c);
+
+        // 효과음: 잡기/이동
+        if (targetCell) playSFX('capture');
+        else playSFX('move');
 
         clearHighlights();
         selected = null;
@@ -163,8 +168,9 @@ export default function main() {
             return;
         }
 
-        // 알림: 체크 상태이면 표시
+        // 알림: 체크 상태이면 효과음
         if (isCheck(board, opponent)) {
+            playSFX('check');
             // 간단히 alert 혹은 시각표시(킹 테두리) 표시 -> 렌더에서 처리
             // 계속 게임 진행
         }
