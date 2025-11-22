@@ -2,9 +2,9 @@
 //   효과음 로드 (원하는 MP3 넣으면 됨)
 // ==============================
 export const sfx = {
-    move: new Audio("./move.mp4"),
-    capture: new Audio("./capture.mp4"),
-    check: new Audio("./checkmate.mp4")
+    move: new Audio("./move.mp3"),
+    capture: new Audio("./capture.mp3"),
+    check: new Audio("./checkmate.mp3")
 };
 
 // ==============================
@@ -55,7 +55,7 @@ export function popup() {
 
     soundBtn.addEventListener("click", () => {
         soundEnabled = !soundEnabled;
-        soundBtn.textContent = soundEnabled ? "사운드: ON" : "사운드: OFF";
+        soundBtn.textContent = soundEnabled ? "Sound: ON" : "Sound: OFF";
 
         localStorage.setItem("chess-sound-enabled", soundEnabled);
 
