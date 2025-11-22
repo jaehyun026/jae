@@ -84,7 +84,7 @@ export function popup() {
         // 사운드 ON/OFF
         const savedSound = localStorage.getItem("chess-sound-enabled");
         soundEnabled = savedSound !== "false";
-        soundBtn.textContent = soundEnabled ? "사운드: ON" : "사운드: OFF";
+        soundBtn.textContent = soundEnabled ? "Sound: ON" : "Sound: OFF";
 
         for (let key in sfx) {
             sfx[key].muted = !soundEnabled;
