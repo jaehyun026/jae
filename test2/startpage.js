@@ -1,26 +1,31 @@
 export default function main() {
-            const optionBtn = document.getElementById("optionBtn");
-        const popup = document.getElementById("optionPopup");
-        const select = document.getElementById("modeSelect");
-        const startBtn = document.getElementById("startBtn");
 
-        // 옵션 클릭 → 팝업 표시
-        optionBtn.addEventListener("click", () => {
-            popup.style.display = "flex";
-        });
+    const popup = document.getElementById("optionPopup");
+    const optionBtn = document.getElementById("optionBtn");
+    const closePopupBtn = document.getElementById("close-popup");
+    const startBtn = document.getElementById("startBtn");
+    const modeSelect = document.getElementById("modeSelect");
 
-        // select 바꾸면 자동 저장 + 팝업 닫기
-        select.addEventListener("change", () => {
-            localStorage.setItem("gameMode", select.value);
-            popup.style.display = "none";
-        });
+    /* 🔥 항상 페이지 열리면 기본 모드는 PVP 로 강제 설정 */
+    localStorage.setItem("gameMode", "pvp");
 
-        // Start 버튼 → chess.html 이동
-        startBtn.addEventListener("click", () => {
-            // 기본값이 없으면 pvp로 저장
-            if (!localStorage.getItem("gameMode")) {
-                localStorage.setItem("gameMode", "pvp");
-            }
-            window.location.href = "chess.html";
-        });
+    /* ===== 팝업 열기 ===== */
+    optionBtn.addEventListener("click", () => {
+        popup.style.display = "flex";
+    });
+
+    /* ===== 팝업 닫기 ===== */
+    closePopupBtn.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
+
+    /* ===== 모드 선택 저장 ===== */
+    modeSelect.addEventListener("change", () => {
+        localStorage.setItem("gameMode", modeSelect.value);
+    });
+
+    /* ===== 게임 시작 ===== */
+    startBtn.addEventListener("click", () => {
+        window.location.href = "chess.html";
+    });
 }

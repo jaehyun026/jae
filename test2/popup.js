@@ -13,7 +13,7 @@ export const sfx = {
 export function playSFX(type) {
     if (!sfx[type]) return;
 
-    sfx[type].currentTime = 0; 
+    sfx[type].currentTime = 0;
     sfx[type].play();
 }
 
@@ -29,6 +29,7 @@ export function popup() {
 
     const soundBtn = document.getElementById("sound-btn");
     const volumeSlider = document.getElementById("volume-slider");
+    const volumeValue = document.getElementById("volume-value");
 
     // ==============================
     //     뒤로가기 (스타트 페이지)
@@ -69,9 +70,16 @@ export function popup() {
     //     볼륨 슬라이더
     // ==============================
     volumeSlider.addEventListener("input", () => {
-        const vol = Number(volumeSlider.value);
-        localStorage.setItem("chess-volume", vol);
+        const volPercent = Number(volumeSlider.value); // 0~100
+        const vol = volPercent / 100;                 // 0~1
 
+        // 저장은 0~100 기준으로
+        localStorage.setItem("chess-volume", volPercent);
+
+        // 숫자 업데이트
+        volumeValue.textContent = volPercent;
+
+        // 실제 오디오 볼륨 반영
         for (let key in sfx) {
             sfx[key].volume = vol;
         }

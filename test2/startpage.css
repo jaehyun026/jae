@@ -36,7 +36,6 @@ header, main, footer, .popup-content {
 
 button {
     padding: 15px 30px;
-    font-size: 56px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -49,6 +48,9 @@ button {
 button:hover {
     color: blue;
     transform: scale(1.05);
+}
+.main-button {
+    font-size: 60px;
 }
 
 header {
@@ -98,6 +100,21 @@ main {
     color: white;
     border: 2px solid white;
     z-index: 30; /* ensure popup box is topmost */
+    display: flex;           /* 수직 배치 */
+    flex-direction: column;  
+}
+#close-popup {
+    padding: 10px;
+    background: #555;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#close-popup:hover {
+    background: #666;
 }
 
 #modeSelect {
