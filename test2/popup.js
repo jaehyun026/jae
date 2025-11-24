@@ -80,51 +80,11 @@ export function popup() {
         const volPercent = Number(volumeSlider.value); // 0 ~ 100
         const vol = Math.max(0, Math.min(1, volPercent / 100)); // 0.0 ~ 1.0
 
-        // 저장: 항상 0~100 기준으로 저장(정규화)
+        // 저장: 항상 0~100 기준
         localStorage.setItem("chess-volume", String(volPercent));
 
-        // 숫자 표시 갱신
+        // UI 표시
         volumeValue.textContent = String(volPercent);
-
-        // 실제 오디오 볼륨 반영 (0.0 ~ 1.0)
-        for (let key in sfx) {
-            try {
-                sfx[key].volume = vol;
-            } catch (e) {
-                // 안전: 드물게 브라우저가 아직 로드 안된 경우를 대비
-                console.warn("Failed to set volume for", key, e);
-            }
-        }
-    });
-
-    // ==============================
-    //     저장된 설정 불러오기 (초기화)
-    // ==============================
-    // 즉시 실행해서 UI를 초기화 (DOMContentLoaded 밖에서도 호출 가능)
-    (function initFromStorage() {
-        // 사운드 ON/OFF 불러오기
-        const savedSound = localStorage.getItem("chess-sound-enabled");
-        if (savedSound !== null) {
-            soundEnabled = savedSound === "true";
-        } else {
-            soundEnabled = true; // 기본 ON
-        }
-        soundBtn.textContent = soundEnabled ? "Sound: ON" : "Sound: OFF";
-
-        for (let key in sfx) {
-            sfx[key].muted = !soundEnabled;
-        }
-
-        // 1) 새로고침할 때 자동으로 50으로 저장
-        localStorage.setItem("chess-volume", "50");
-
-        // 2) 내부 값 처리
-        let volPercent = 50;
-        const vol = 0.5; // 50%
-
-        // UI 업데이트
-        volumeSlider.value = "50";
-        volumeValue.textContent = "50";
 
         // 실제 오디오 볼륨 적용
         for (let key in sfx) {
@@ -135,4 +95,45 @@ export function popup() {
             }
         }
     });
+
+
+    // ==============================
+    //     저장된 설정 불러오기 (초기화)
+    // ==============================
+    (function initFromStorage() {
+
+        // ===== 사운드 ON/OFF 유지 =====
+        const savedSound = localStorage.getItem("chess-sound-enabled");
+        if (savedSound !== null) {
+            soundEnabled = savedSound === "true";
+        } else {
+            soundEnabled = true;
+        }
+        soundBtn.textContent = soundEnabled ? "Sound: ON" : "Sound: OFF";
+
+        for (let key in sfx) {
+            sfx[key].muted = !soundEnabled;
+        }
+
+
+        // ===== 볼륨 불러오기 =====
+        // 저장된 값이 있든 없든 무조건 50으로 초기화
+        const defaultVolPercent = 50;
+        localStorage.setItem("chess-volume", String(defaultVolPercent));
+
+        const vol = defaultVolPercent / 100;
+
+        // UI 업데이트
+        volumeSlider.value = String(defaultVolPercent);
+        volumeValue.textContent = String(defaultVolPercent);
+
+        // 실제 오디오 볼륨도 50% 적용
+        for (let key in sfx) {
+            try {
+                sfx[key].volume = vol;
+            } catch (e) {
+                console.warn("Failed to set volume for", key, e);
+            }
+        }
+    })();
 }
