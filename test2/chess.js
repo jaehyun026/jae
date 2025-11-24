@@ -147,8 +147,8 @@ export default function main() {
                     playSFX('check');
                 }
 
-                renderBoard();
                 turn = 'white';
+                renderBoard();
             }, 1500);
         }
 
