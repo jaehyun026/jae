@@ -1,5 +1,5 @@
 
-const pieceScore = {
+/*const pieceScore = {
     pawn: 1,
     knight: 3,
     bishop: 3,
@@ -48,8 +48,8 @@ function aiMove(board) {
 
     if (!bestMove) return board; // no move
     return simulateMove(board, bestMove.from.r, bestMove.from.c, bestMove.to.r, bestMove.to.c);
-}
-
+}*/
+import { aiMove } from './ai.js';
 import { initialBoard, cloneBoard, pieces } from './firstdata.js';
 import { getValidMoves, simulateMove } from './chessrule.js';
 import { isCheck, isCheckmate, updateStatus } from './checkmate.js';
@@ -66,8 +66,8 @@ function debounce(fn, wait = 80) {
 }
 
 export default function main() {
-        popup();
-        logoeffect();
+    popup();
+    logoeffect();
     const gameMode = localStorage.getItem("gameMode");
 
     const boardEl = document.getElementById("chessboard");
@@ -77,10 +77,10 @@ export default function main() {
     let legalMoves = []; // [[r,c],...]
 
     // AI가 흑부터 두는 모드라면 초기 보드에서 AI 한 수 두기
-   /* if (gameMode === "pve" && turn === "black") {
-        board = aiMove(board);
-        turn = "white";
-    }*/
+    /* if (gameMode === "pve" && turn === "black") {
+         board = aiMove(board);
+         turn = "white";
+     }*/
     // 초기 렌더
     renderBoard();
 
@@ -182,11 +182,10 @@ export default function main() {
 
         // PVE 모드: AI(black)가 다음이라면 자동으로 한 수 두도록 처리
         if (gameMode === 'pve' && turn === 'black') {
-            // UI 반영을 위해 약간 지연 후 실행
             setTimeout(() => {
-                board = aiMove(board);
+                board = aiMove(board, 'black', 3); // depth 3 중간 난이도
 
-                // AI가 둔 후 체크메이트 검사 (플레이어인 white가 체크메이트 당했는지)
+                // 체크메이트 검사
                 if (isCheckmate(board, 'white')) {
                     turn = 'white';
                     renderBoard();
@@ -194,11 +193,16 @@ export default function main() {
                     return;
                 }
 
-                // AI 두고 나면 백(플레이어) 차례로 전환
-                turn = 'white';
+                // 체크 여부
+                if (isCheck(board, 'white')) {
+                    playSFX('check');
+                }
+
                 renderBoard();
-            }, 300);
+                turn = 'white';
+            }, 1500);
         }
+
     });
 
     // 렌더 함수
