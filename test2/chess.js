@@ -110,39 +110,48 @@ export default function main() {
         selected = null;
         legalMoves = [];
 
-        // 턴 변경 및 체크/체크메이트 검사
+        // --- 턴 변경 및 체크/체크메이트 검사 ---
         const opponent = turn === "white" ? "black" : "white";
-        if (isCheckmate(board, opponent)) {
-            turn = opponent;  // 턴을 미리 바꿈 (상대 턴이 체크메이트 상태임을 renderBoard에서 표시)
-            renderBoard();
-            setTimeout(() => alert(`${turn.toUpperCase()} 승리! 체크메이트입니다.`), 10);
-            return;
+
+        if (gameMode === "pve") {
+            // PVE 모드 ─ 사람은 항상 white, AI는 항상 black
+
+            if (turn === "white") {
+                // 사람이 둔 직후 → black이 체크메이트인지 검사
+                if (isCheckmate(board, "black")) {
+                    renderBoard();
+                    setTimeout(() => alert(`WHITE 승리! 체크메이트입니다.`), 10);
+                    return;
+                }
+
+                if (isCheck(board, "black")) playSFX('check');
+
+            } else {
+                // AI가 둔 직후 → white가 체크메이트인지 검사 (여기는 아래 AI 부분에서 실행됨)
+            }
+
+        } else {
+            // --- PvP 모드 (기존 방식) ---
+            if (isCheckmate(board, opponent)) {
+                renderBoard();
+                setTimeout(() => alert(`${turn.toUpperCase()} 승리! 체크메이트입니다.`), 10);
+                return;
+            }
+
+            if (isCheck(board, opponent)) playSFX('check');
         }
 
-        // 알림: 체크 상태이면 효과음
-        if (isCheck(board, opponent)) {
-            playSFX('check');
-            // 간단히 alert 혹은 시각표시(킹 테두리) 표시 -> 렌더에서 처리
-            // 계속 게임 진행
-        }
-
+        // 턴 교체
         turn = opponent;
         renderBoard();
+
 
         // PVE 모드: AI(black)가 다음이라면 자동으로 한 수 두도록 처리
         if (gameMode === 'pve' && turn === 'black') {
             setTimeout(() => {
-                board = aiMove(board, 'black', 3); // depth 3 중간 난이도
+                board = aiMove(board, 'black', 3);
 
-                // 체크메이트 검사
-                if (isCheckmate(board, 'white')) {
-                    turn = 'white';
-                    renderBoard();
-                    setTimeout(() => alert(`BLACK 승리! 체크메이트입니다.`), 10);
-                    return;
-                }
-
-                // 체크 여부
+                // 체크 여부만 확인
                 if (isCheck(board, 'white')) {
                     playSFX('check');
                 }
@@ -151,6 +160,7 @@ export default function main() {
                 renderBoard();
             }, 1500);
         }
+
 
     });
 
