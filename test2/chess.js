@@ -149,17 +149,45 @@ export default function main() {
         // PVE 모드: AI(black)가 다음이라면 자동으로 한 수 두도록 처리
         if (gameMode === 'pve' && turn === 'black') {
             setTimeout(() => {
-                board = aiMove(board, 'black', 3);
+                // aiMove가 객체 반환하도록 변경된 점 주의
+                const aiResult = aiMove(board, 'black', 3);
+                // aiResult: { board: newBoard, move: bestMove|null }
+                board = aiResult.board;
 
-                // 체크 여부만 확인
+                // AI가 둘 수 있는 수가 없었다면 aiResult.move === null
+                if (!aiResult.move) {
+                    // AI가 둘 수 없는 상황: 체크이면 BLACK이 졌다(WHITE 승),
+                    // 체크가 아니면 스테일메이트(무승부)
+                    if (isCheck(board, 'black')) {
+                        // black이 체크 상태이므로 black이 체크메이트 당한 것 -> WHITE 승리
+                        renderBoard();
+                        setTimeout(() => alert(`WHITE 승리! 체크메이트입니다.`), 10);
+                        return;
+                    } else {
+                        // 스테일메이트(무승부)
+                        renderBoard();
+                        setTimeout(() => alert(`무승부(스테일메이트)입니다.`), 10);
+                        return;
+                    }
+                }
+
+                // AI가 실제로 둔 뒤의 체크/체크메이트 검사 (사람(white) 입장에서)
+                if (isCheckmate(board, 'white')) {
+                    renderBoard();
+                    setTimeout(() => alert(`BLACK 승리! 체크메이트입니다.`), 10);
+                    return;
+                }
+
                 if (isCheck(board, 'white')) {
                     playSFX('check');
                 }
 
+                // AI가 둔 후에는 항상 white 차례
                 turn = 'white';
                 renderBoard();
             }, 1500);
         }
+
 
 
     });
