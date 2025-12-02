@@ -53,14 +53,6 @@ export function updateStatus(board, turn) {
     if (!statusMessage) return;
     statusMessage.innerText = "";
 
-    // 게임 끝 감지: 어느 쪽 킹이라도 보드에서 사라지면 종료 상태로 표시
-    const whiteKing = findKing(board, 'white');
-    const blackKing = findKing(board, 'black');
-    if (!whiteKing || !blackKing) {
-        statusMessage.innerText = 'end';
-        return;
-    }
-
     if (isCheckmate(board, turn)) {
         statusMessage.innerText = `${turn} 체크메이트!`;
     } else if (isCheck(board, turn)) {

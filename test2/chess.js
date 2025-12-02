@@ -289,5 +289,5 @@ export default function main() {
     const debouncedResize = debounce(resizeBoard, 80);
     window.addEventListener("resize", debouncedResize);
     window.addEventListener("orientationchange", debouncedResize);
-
+    
 }

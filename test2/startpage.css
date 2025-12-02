@@ -26,6 +26,8 @@ body {
     z-index: -1;
     pointer-events: none;
     filter: brightness(0.6) saturate(0.95);
+    will-change: transform, filter;
+    animation: videoPulse 5s ease-in-out infinite;
 }
 
 /* 콘텐츠가 비디오 위에 표시되도록 z-index 조정 */
@@ -123,13 +125,6 @@ main {
     border-radius: 8px;
     background: black;
     color: white;
-}
-
-/* ===== 배경 비디오 펄스 효과 (강조판) ===== */
-/* 좀 더 눈에 띄게: 스케일과 밝기, 색조와 블러를 함께 애니메이트합니다. */
-.bg-video {
-    will-change: transform, filter;
-    animation: videoPulse 5s ease-in-out infinite;
 }
 
 @keyframes videoPulse {
